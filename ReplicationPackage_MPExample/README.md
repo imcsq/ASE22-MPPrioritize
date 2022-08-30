@@ -1,0 +1,6 @@
+This dir provides 50 example MPs in the raw image format **for two purposes**: 1) intuitively show the style of our MPs, and 2) introduce the file structure when using our proposal to prioritize any customized MPs. 
+
+The steps to use our method to prioritize the MPs are introduced in [usage instruction](../ReplicationPackage_Code/README.md). And for all the 5000 MPs that are used in our evaluation (which contain a large number of small files and take up a large size and thus **cannot be stored in the same intuitive way** as the 50 example MPs in this GitHub repository), please first refer to [here](https://drive.google.com/drive/folders/1w1AxuL2EhJzu9BVcbldVABTc0EdIdd-c?usp=sharing) for the compact zipped version and follow [usage instruction](../ReplicationPackage_Code/README.md) to process them. 
+
+As a reminder, our scripts are fully exercisable with the example MPs to prioritize them and illustrate our evaluation process. *But the results in our paper may not be exactly reproduced with these partial 50 MPs. For exactly replicating our evaluation results, please refer to [usage instruction](../ReplicationPackage_Code/README.md).* 
+In addition, you can also construct your own MPs by collecting random images from the ImageNet ILSVRC 2012 dataset and using your desired MRs to construct the MPs, and easily prioritize them with our scripts.
