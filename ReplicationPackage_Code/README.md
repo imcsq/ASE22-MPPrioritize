@@ -10,8 +10,7 @@ The steps to (a) prioritize any customized MPs, or (b) replicate our evaluation 
 ```bash
 git clone https://github.com/imcsq/ASE22-MPPrioritize/
 cd ASE22-MPPrioritize/ReplicationPackage_Code
-conda activate MPPrioritize
-# please first prepare the runtime environment following INSTALL.md
+conda activate MPPrioritize # please first prepare the runtime environment following INSTALL.md
 ```
 
 2. Prepare the MPs to be prioritized.
@@ -77,7 +76,7 @@ python 4_calc_napvd.py --prioritization_file /path/to/prioritization/output_file
 
 In this section, we introduce the method to leverage the above-mentioned scripts to obtain the results for each RQ in batch. The following example commands are for replicating the experiments (mode (b)). You can also use the mode (a) commands introduced above to obtain results for the customized MPs.
 
-1. Run prioritization for various models with different diversity metrics but the default configuration to get the NAPVD result table for RQ1 (which is the core result of the evaluation of this work).
+1. Run prioritization for various models with different diversity metrics and the default configuration to get the NAPVD result table for RQ1 (which is the core result of the evaluation of this work).
 ```bash
 # e.g., for replicating the experiments (mode (b)), you can execute:
 python 1_calc_all_diversity.py --mp_path='image.zip' --model_type='vgg16' --layer_name='block4_conv1' --output_path='diversity/' --function_pickle='function_pickles_for_bd&sd/'
@@ -98,7 +97,7 @@ python draw_table.py --vgg16_diversity_path='diversity/vgg16_block4_conv1_divers
 # --output_path specifies the path to store the table image.
 
 # Expect: A table will be printed on the screen to organize and show all the NAPVDs. A file `Table.eps` will be generated in `results/` as well (it is the beautified version of the printed table and if needed, please use the default image viewer in Ubuntu or other correct viewers to view it). 
-# The above example commands for replicating (mode (b)) will replicate the NAPVDs in Table-1 in our paper. These NAPVDs are the overall results of our evaluation. 
+# !!! The above example commands for replicating (mode (b)) will replicate the NAPVDs in **Table-1** in our paper. These NAPVDs are the overall results of our evaluation. !!!
 ```
 
 2. Run prioritization for a model with a specified diversity metric and a specified configuration (e.g., breakpoint location and output type), to investigate the configuration sensitivity of the proposal and answer RQ2. The data in `CompleteResults/RQ1&2 (Comparison under all configurations)/` are also obtained in this way.
@@ -110,7 +109,7 @@ python 1_calc_all_diversity.py --mp_path='image.zip' --model_type='vgg16' --laye
 python 1_calc_all_diversity.py --mp_path='image.zip' --model_type='vgg16' --layer_name='block3_conv1' --output_path='diversity/' --function_pickle='function_pickles_for_bd&sd/'
 python 1_calc_all_diversity.py --mp_path='image.zip' --model_type='vgg16' --layer_name='block4_conv1' --output_path='diversity/' --function_pickle='function_pickles_for_bd&sd/' # if you have executed this command before for the other purposes (e.g., generating Table-1), just skip it to save time
 python 1_calc_all_diversity.py --mp_path='image.zip' --model_type='vgg16' --layer_name='block5_conv1' --output_path='diversity/' --function_pickle='function_pickles_for_bd&sd/'
-python 2_count_violations.py --mp_path='image.zip' --model_type='vgg16' --violation_record='violations/'
+python 2_count_violations.py --mp_path='image.zip' --model_type='vgg16' --violation_record='violations/' # if you have executed this command before for the other purposes (e.g., generating Table-1), just skip it to save time
 python 3_prioritize.py --diversity_file='diversity/vgg16_block1_conv1_diversity.npy' --diversity_type='hd' --output_path='prioritize/'
 python 4_calc_napvd.py --prioritization_file='prioritize/output.npy' --violation_record='violations/vgg16.npy'
 python 3_prioritize.py --diversity_file='diversity/vgg16_block2_conv1_diversity.npy' --diversity_type='hd' --output_path='prioritize/'
@@ -122,13 +121,14 @@ python 4_calc_napvd.py --prioritization_file='prioritize/output.npy' --violation
 python 3_prioritize.py --diversity_file='diversity/vgg16_block5_conv1_diversity.npy' --diversity_type='hd' --output_path='prioritize/'
 python 4_calc_napvd.py --prioritization_file='prioritize/output.npy' --violation_record='violations/vgg16.npy'
 
-# Expect: Every time when executing `4_calc_napvd.py`, the NAPVD corresponding to the specified setup will be printed. The users can collect all the obtained NAPVDs and use the other tools to formulate intuitive tables and figures. 
-# The above example commands for replicating (mode (b)) will give five NAPVDs, corresponding to using the beginning layers of the five blocks in VGG16 as the breakpoint. These data are used to formulate the blue solid line in Figure-5(a) in our paper. 
+# Expect: Every time executing `4_calc_napvd.py`, the NAPVD corresponding to the specified configuration will be printed. The users can collect all the outputted NAPVDs and use the other tools to formulate intuitive tables and figures. 
+# !!! The above example commands for replicating (mode (b)) will give five NAPVDs, corresponding to using the beginning layers of the five blocks in VGG16 as the breakpoint. These data are used to formulate the blue solid line in **Figure-5(a)** in our paper. !!!
 # For the other data points of the other configurations (which cannot be completely enumerated here), users can adjust parameters and run our scripts in this way to obtain the corresponding NAPVDs. 
 ```
 
-3. Run prioritization for a specified model and a specified diversity metric to get the Box-Plot result for RQ3. The data in `CompleteResults/RQ3(Box plots for all implementations of our metric))/` are also obtained in this way.
+3. Calculate diversity and draw box plots that reflect the correlation between the violation revealing abilities of different MRs and their MPs' diversity (for RQ3). The figures in `CompleteResults/RQ3(Box plots for all implementations of our metric))/` are also obtained in this way.
 ```bash
+# e.g., for replicating the experiments (mode (b)) to investigate the correlation between the HD-based diversity and the violation rates on ResNet50 model, you can execute:
 python 1_calc_all_diversity.py --mp_path='image.zip' --model_type='resnet50' --layer_name='activation_25' --output_path='diversity/' --function_pickle='function_pickles_for_bd&sd/' # if you have executed this command before for the other purposes (e.g., generating Table-1), just skip it to save time
 python 2_count_violations.py --mp_path='image.zip' --model_type='resnet50' --violation_record='violations/' # if you have executed this command before for the other purposes (e.g., generating Table-1), just skip it to save time
 python box_plot.py --diversity_path='diversity/resnet50_activation_25_diversity.npy' --output_path='results/' --diversity_type='hd' --violation_record='violations/resnet50.npy'
@@ -138,6 +138,6 @@ python box_plot.py --diversity_path='diversity/resnet50_activation_25_diversity.
 # --violation_record specifies the file to store the violation situation of all MPs for specified model.
 
 # Expect: A box-plot image file `hd_Box_Plot.eps` will be generated in `results/` (please use the default image viewer in Ubuntu or other correct viewers to view it). 
-# The above example commands for replicating (mode (b)) will replicate the box plot image Figure-9(c) in our paper.
+# !!! The above example commands for replicating (mode (b)) will replicate the box plot image **Figure-9(c)** in our paper. !!!
 # For the other diversity metric and models, users can adjust parameters and run our scripts in this way to obtain the corresponding box plots. 
 ```
