@@ -1,6 +1,6 @@
-# **Artifact for the Paper "Boosting the Revealing of Detected Violations in Deep Learning Testing: A Diversity-Guide Method"**
+# **Artifact for the Paper "Boosting the Revealing of Detected Violations in Deep Learning Testing: A Diversity-Guided Method"**
 
-This is the artifact for the *ASE 2022 Research Track* paper "*Boosting the Revealing of Detected Violations in Deep Learning Testing: A Diversity-Guide Method*".
+This is the artifact for the *ASE 2022 Research Track* paper "*Boosting the Revealing of Detected Violations in Deep Learning Testing: A Diversity-Guided Method*".
 
 It contains:
 
@@ -52,8 +52,9 @@ If you find our paper useful, please kindly cite it as:
   author    = {Xiaoyuan Xie and
                Pengbo Yin and
                Songqiang Chen},
-  title     = {Testing Your Question Answering Software via Asking Recursively},
+  title     = {Boosting the Revealing of Detected Violations in Deep Learning Testing: A Diversity-Guided Method},
   booktitle = {Proceedings of the 37th {IEEE/ACM} International Conference on Automated Software Engineering, {ASE} 2022},
   year      = {2022},
+  doi       = {10.1145/3551349.3556919}
 }
 ```
