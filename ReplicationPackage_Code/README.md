@@ -15,7 +15,7 @@ conda activate MPPrioritize # please first prepare the runtime environment follo
 
 2. Prepare the MPs to be prioritized.
 For (a), we provide 50 MPs as a brief and representative example in [this directory](../ReplicationPackage_MPExample). You can follow the structure to prepare your own MPs.
-For(b), due to the file size, we haven't provided 5000MPs used in our evaluation in this repository directly. Please feel free to contact us( Ryannn@whu.edu.cn) to get the file, if you want to replicate our evaluation experiments.
+For (b), due to the file size, we haven't provided 5000MPs used in our evaluation in this repository directly. Please feel free to contact us( Ryannn@whu.edu.cn) to get the file, if you want to replicate our evaluation experiments.
 
 1. Run `1_calc_all_diversity.py` to calculate the diversity w.r.t. all metrics for each MP on the specified test object and breakpoint.
 ```bash
